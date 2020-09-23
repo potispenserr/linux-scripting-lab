@@ -7,6 +7,22 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <math.h>
+#include <thread>
+#include <functional>
+void calculate(){
+    std::cout << "My threadID is: " << std::this_thread::get_id() << "\n";
+    double sum;
+    double i;
+    double j;
+    for(i = 1; i < 50001; i++){
+        for(j = 1; j < i; j++){
+            sum += sqrt(i * j);
+        }
+    }
+    std::cout << "Sum is: " << sum << std::endl;
+}
+
+
 int main(int argc, const char* argv[])
 {
     if(argc <= 1){
@@ -36,8 +52,11 @@ int main(int argc, const char* argv[])
                 system("uname -a");
 
             }
+
+            //If first argument is -f(fork processes)
             else if(argList[1] == "-f"){
                 
+                //error checking
                 if (argc == 2){
                     std::cout << "you didn't type in a number for the amount of forks, try again" << "\n";
                 }
@@ -71,13 +90,47 @@ int main(int argc, const char* argv[])
                 for(int k = 0; k < pidList.size() - 1; k++){
                     std::cout << "Finished loop with sum of: " << sum << " and pid " << pidList[k] << "\n"; 
                 }
-                
-                
-
 
 
 
                 }
+
+            }
+
+            else if(argList[1] == "-t"){
+                int userinput = stoi(argList[2]);
+                std::vector<std::thread> threadList;
+                int numOfThreads = std::thread::hardware_concurrency();
+                if(userinput > numOfThreads){
+                    std::cout << "Number of threads requested exceedes maximum threads supported. Requested: " << argList[2] << " Max number of threads: " << numOfThreads << std::endl;  
+                    //threadList.reserve(numOfThreads);
+                }
+
+                else{
+                    threadList.reserve(userinput);
+                    std::cout << "size of this input: " << userinput << std::endl;
+                    std::cout << "Max number of threads the processor supports: " << numOfThreads << std::endl;
+
+                    for(int i = 0; i < userinput; i++){
+                        std::cout << "Index is: " << i << std::endl;
+                        threadList.push_back(std::thread(calculate));
+                    }
+                    std::cout << "exiting" << std::endl;
+                    for(int i = 0; i < userinput; i++){
+                        threadList[i].join();
+                }
+                }
+                
+                /*for(auto &t : threadList)
+                    t.join();*/
+                /*for(int i = 0; i < threadList.size() - 1; i++){
+                    threadList[i].join();
+                    
+                }*/
+                //std::thread lol(calculate);
+                //lol.join();
+                
+
 
             }
             

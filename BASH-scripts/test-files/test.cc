@@ -1,3 +1,12 @@
+// bw.txt
+// ----------------------------------------------------------------------------
+// THE BEER-WARE LICENSE (Revision 42):
+// Ruben Winblad Von Walter Capizzello wrote this file.  As long as you retain this notice you
+// can do whatever you want with this stuff. If we meet some day, and you think
+// this stuff is worth it, you can buy me a beer in return.
+// ----------------------------------------------------------------------------
+//
+
 #include "stdlib.h"
 #include <iostream>
 #include <string>
@@ -10,9 +19,9 @@
 #include <functional>
 void calculate(){
     std::cout << "My threadID is: " << std::this_thread::get_id() << "\n";
-    double sum;
-    double i;
-    double j;
+    float sum;
+    float i;
+    float j;
     for(i = 1; i < 50001; i++){
         for(j = 1; j < i; j++){
             sum += sqrt(i * j);
@@ -25,7 +34,7 @@ void calculate(){
 int main(int argc, const char* argv[])
 {
     if(argc <= 1){
-        std::cout << "What are you doing with your life? Stop wasting it away by doing stupid things. Try again and write more arguments" << "\n";
+        std::cout << "What are you doing with your life? Stop wasting it away by doing stupid shit. Try again and write more arguments" << "\n";
     }
         else{
             std::vector<std::string> argList;
@@ -35,7 +44,7 @@ int main(int argc, const char* argv[])
         std::cout << "ArgC " << argc << " ArgV " << argv << "\n";
         std::cout << "YO" << "\n"; 
         if(argc >= 4){
-            std::cout << "What are you doing with your life? Stop wasting it away by doing stupid things. Try again and write less arguments" << "\n";
+            std::cout << "What are you doing with your life? Stop wasting it away by doing stupid shit. Try again and write less arguments" << "\n";
             
         }
 
@@ -46,10 +55,9 @@ int main(int argc, const char* argv[])
 
             //If first argument is -i(processor info)
             if(argList[1] == "-i"){
-                system("ip addr show");
+                system("hwinfo");
                 system("lscpu");
                 system("uname -a");
-                system("df -ah");
 
             }
 
@@ -65,18 +73,23 @@ int main(int argc, const char* argv[])
                 }
                 else{
 
-                //creates a vector for all pid:s and populates it
-                double sum;
+                
+                float sum;
                 std::vector<int> pidList;
                 pidList.resize(std::stoi(argList[2]));
                 for(int i = 0; i < pidList.size() - 1; i++){
                     pidList[i] = fork();
                     std::cout << "My PID is: " << pidList[i] << "\n";
                 }                
+                /*if(pid > 0){
+                    std::cout << "I am: First Parent" << "\n";
+                }
+                else if(pid == 0){
+                    std::cout << "I am: First Child"  << "\n";
+                }*/
                 
-                //the actual calculation
-                double i;
-                double j;
+                float i;
+                float j;
                 for(i = 1; i < 50001; i++){
                     for(j = 1; j < i; j++){
                         sum += sqrt(i * j);
@@ -91,7 +104,7 @@ int main(int argc, const char* argv[])
                 }
 
             }
-            //if first argument is -t(create threads)
+
             else if(argList[1] == "-t"){
                 int userinput = stoi(argList[2]);
                 std::vector<std::thread> threadList;
@@ -103,19 +116,29 @@ int main(int argc, const char* argv[])
 
                 else{
                     threadList.reserve(userinput);
+                    std::cout << "size of this input: " << userinput << std::endl;
                     std::cout << "Max number of threads the processor supports: " << numOfThreads << std::endl;
-                    //populates the vector with threads doing the calculation
+
                     for(int i = 0; i < userinput; i++){
                         std::cout << "Index is: " << i << std::endl;
                         threadList.push_back(std::thread(calculate));
                     }
                     std::cout << "exiting" << std::endl;
-                    //waits for all the threads to finish before exiting
                     for(int i = 0; i < userinput; i++){
                         threadList[i].join();
                 }
                 }
                 
+                /*for(auto &t : threadList)
+                    t.join();*/
+                /*for(int i = 0; i < threadList.size() - 1; i++){
+                    threadList[i].join();
+                    
+                }*/
+                //std::thread lol(calculate);
+                //lol.join();
+                
+
 
             }
             

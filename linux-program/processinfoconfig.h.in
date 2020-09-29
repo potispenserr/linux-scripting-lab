@@ -1,0 +1,4 @@
+ 
+// the configured options and settings for processinfo
+#define processinfo_VERSION_MAJOR @processinfo_VERSION_MAJOR@
+#define processinfo_VERSION_MINOR @processinfo_VERSION_MINOR@

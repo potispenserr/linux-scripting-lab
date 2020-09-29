@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/rubcap8/Documents/gitgood/linux-scripting/linux-program/processinfo.cpp
+stdlib.h
+/home/rubcap8/Documents/gitgood/linux-scripting/linux-program/stdlib.h
+iostream
+-
+string
+-
+vector
+-
+unistd.h
+-
+sys/wait.h
+-
+sys/types.h
+-
+math.h
+-
+thread
+-
+functional
+-
+processinfoconfig.h
+/home/rubcap8/Documents/gitgood/linux-scripting/linux-program/processinfoconfig.h
+
+/home/rubcap8/Documents/gitgood/linux-scripting/linux-program/processinfoconfig.h
+

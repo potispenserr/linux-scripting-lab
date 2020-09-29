@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++11 -no-pie -pthread -rdynamic CMakeFiles/processinfo.dir/processinfo.cpp.o -o ../bin/processinfo 

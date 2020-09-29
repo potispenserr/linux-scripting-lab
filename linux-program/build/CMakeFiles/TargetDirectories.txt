@@ -1,0 +1,3 @@
+/home/rubcap8/Documents/gitgood/linux-scripting/linux-program/build/CMakeFiles/rebuild_cache.dir
+/home/rubcap8/Documents/gitgood/linux-scripting/linux-program/build/CMakeFiles/edit_cache.dir
+/home/rubcap8/Documents/gitgood/linux-scripting/linux-program/build/CMakeFiles/processinfo.dir
